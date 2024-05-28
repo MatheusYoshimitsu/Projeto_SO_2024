@@ -27,6 +27,9 @@ int main(){
     
     ProgramHeader header = readHeader(header, "synthetic_2.txt");
 
+    print();
+
+
     return 0;
 }
 
