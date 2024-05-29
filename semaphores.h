@@ -1,0 +1,2 @@
+void semaphoreP();
+void semaphoreV();

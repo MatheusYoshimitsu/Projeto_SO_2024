@@ -7,7 +7,7 @@ typedef struct header
     char *semaphores_list;
 } ProgramHeader;
 
-ProgramHeader readHeader(char *file_name);
+ProgramHeader readHeader(FILE *file);
 
 // Virtual Commands
 void exec(int t);

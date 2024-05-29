@@ -1,0 +1,60 @@
+// Etore Xavier
+// Matheus Yoshimitsu Tamashiro Pires Lanzo
+#include <stdio.h>
+#include <string.h>
+#include "main.h"
+
+int main() {
+    ProgramHeader teste;
+
+    teste.program_name = "sint";
+    teste.segment_id = 1;
+    teste.original_priority = 3;
+    teste.segment_size = 10;
+    teste.semaphores_list = "s t";
+
+    printf("Program name: %s\n", teste.program_name);
+    printf("Segment ID: %d\n", teste.segment_id);
+    printf("Original Priority: %d\n", teste.original_priority);
+    printf("Segment Size: %d\n", teste.segment_size);
+    printf("Semaphores List: %s\n", teste.semaphores_list);
+
+    // Abrir arquivo com dados de entrada:
+    FILE *input_file = fopen("synthetic_2.txt", "r");
+
+    // Caso não consiga abrir:
+    if (input_file == NULL) {
+        perror("Erro ao abrir o arquivo"); 
+        return 1;
+    }
+
+    ProgramHeader header = readHeader(input_file);
+
+    fclose(input_file);
+
+    printf("\n\n");
+    printf("Program name: %s\n", header.program_name);
+    printf("Segment ID: %d\n", header.segment_id);
+    printf("Original Priority: %d\n", header.original_priority);
+    printf("Segment Size: %d\n", header.segment_size);
+    printf("Semaphores List: %s\n", header.semaphores_list); 
+
+    return 0;
+}
+
+ProgramHeader readHeader(FILE *file){
+    ProgramHeader header;
+    char buffer[256];
+
+    fscanf(file, "%s\n", buffer);
+    header.program_name = strdup(buffer);
+
+    fscanf(file, "%d\n", &header.segment_id);
+    fscanf(file, "%d\n", &header.original_priority);
+    fscanf(file, "%d\n", &header.segment_size);
+
+    fscanf(file, "%[^\n]\n", buffer);
+    header.semaphores_list = strdup(buffer);
+
+    return header;
+}

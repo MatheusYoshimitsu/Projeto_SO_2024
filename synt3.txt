@@ -1,0 +1,17 @@
+sint3
+3
+2
+64
+s t
+
+exec 700
+read 60
+P(s)
+exec 400
+P(t)
+exec 1000
+write 60
+print 200
+V(t)
+V(s)
+exec 400
